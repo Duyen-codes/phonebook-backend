@@ -39,7 +39,7 @@ app.get("/api/persons", (request, response) => {
   });
 });
 
-app.post("/api/persons", (request, response, next) => {
+app.post("/api/persons", async (request, response, next) => {
   const body = request.body;
 
   if (body.name === undefined || body.number === undefined) {
@@ -47,7 +47,6 @@ app.post("/api/persons", (request, response, next) => {
       error: "content missing",
     });
   }
-
   const person = new Person({
     name: body.name,
     number: body.number,

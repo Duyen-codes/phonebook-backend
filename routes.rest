@@ -1,0 +1,17 @@
+GET http://localhost:3001/api/persons HTTP/1.1
+
+#### 
+GET http://localhost:3001/api/persons/5 HTTP/1.1
+
+###
+DELETE http://localhost:3001/api/persons/6326eea3e4a8122f14bd35f9
+
+###
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "mystery",
+    "number": "041-000001"
+}
+

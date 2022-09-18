@@ -39,7 +39,7 @@ app.get("/api/persons", (request, response) => {
   });
 });
 
-app.post("/api/persons", (request, response) => {
+app.post("/api/persons", (request, response, next) => {
   const body = request.body;
 
   if (body.name === undefined || body.number === undefined) {
@@ -53,22 +53,28 @@ app.post("/api/persons", (request, response) => {
     number: body.number,
   });
 
-  person.save().then((savedPerson) => {
-    console.log("savedPerson", savedPerson);
-    response.json(savedPerson);
-  });
+  person
+    .save()
+    .then((savedPerson) => {
+      response.json(savedPerson);
+    })
+    .catch((error) => next(error));
 });
 
 app.put("/api/persons/:id", (request, response, next) => {
-  const body = request.body;
+  const { name, number } = request.body;
   const person = {
-    name: body.name,
-    number: body.number,
+    name,
+    number,
   };
-  Person.findByIdAndUpdate(request.params.id, person, { new: true })
+  Person.findByIdAndUpdate(request.params.id, person, {
+    new: true,
+    runValidators: true,
+    context: "query",
+  })
     .then((updatedPerson) => {
       console.log("updatedPerson", updatedPerson);
-      response.status(201).json(updatedPerson);
+      response.json(updatedPerson);
     })
     .catch((error) => next(error));
 });

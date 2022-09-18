@@ -15,3 +15,7 @@ Content-Type: application/json
     "number": "041-000001"
 }
 
+
+###
+
+GET http://localhost:3001/api/persons/6326bc05079e498061845f4e HTTP/1.1

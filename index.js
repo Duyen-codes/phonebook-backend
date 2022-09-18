@@ -35,7 +35,6 @@ app.get("/", (request, response) => {
 
 app.get("/api/persons", (request, response) => {
   Person.find({}).then((persons) => {
-    console.log("persons fetched from mongoDB: ", persons);
     response.json(persons);
   });
 });

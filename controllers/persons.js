@@ -63,6 +63,7 @@ personsRouter.get("/info", (request, response, next) => {
 personsRouter.get("/:id", (request, response, next) => {
   Person.findById(request.params.id)
     .then((result) => {
+      logger.info("result", result);
       return response.json(result);
     })
     .catch((error) => next(error));

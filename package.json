@@ -11,6 +11,10 @@
     "deploy": "git push heroku main",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
     "logs:prod": "heroku logs --tail",
+    "flybuild:ui": "rm -rf build && cd ../phonebook-frontend/ && npm run build && cp -r build ../phonebook-backend",
+    "flydeploy": "fly deploy",
+    "flydeploy:full": "npm run flybuild:ui && npm run flydeploy",
+    "flylogs:prod": "fly logs",
     "lint": "eslint ."
   },
   "keywords": [],
